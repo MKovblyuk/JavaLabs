@@ -3,7 +3,10 @@ package Services;
 import Classes.Animal;
 import Classes.Aviary;
 import Classes.Employee;
+import Enums.Sex;
+import Enums.Type;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -22,6 +25,60 @@ public class AviaryService {
 
     public void setAviary(Aviary aviary) {
         this.aviary = aviary;
+    }
+
+    ////////////////////////////     methods for animals  //////////////////////////////////
+
+    public List<Animal> animalsWithSex(Sex sex){
+        return aviary.getAnimals().stream().filter(x -> x.getSex().equals(sex)).collect(Collectors.toList());
+    }
+
+    public List<Animal> animalsWithType(Type type){
+        return aviary.getAnimals().stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
+    }
+
+    public List<Animal> animalsOlder(LocalDate localDate){
+        return aviary.getAnimals().stream().filter(x -> x.getDateOfBirth().isAfter(localDate)).collect(Collectors.toList());
+    }
+
+    public List<Animal> animalsYounger(LocalDate localDate){
+        return aviary.getAnimals().stream().filter(x -> x.getDateOfBirth().isBefore(localDate)).collect(Collectors.toList());
+    }
+
+    /**
+     *
+     * @param start date
+     * @param end date
+     * @return list fo animals which DateOfBirth a within from start to end
+     */
+    public List<Animal> animalsWithBirthDate(LocalDate start,LocalDate end){
+        return aviary.getAnimals().stream().filter(x -> x.getDateOfBirth().isAfter(start))
+                .filter(x -> x.getDateOfBirth().isBefore(end)).collect(Collectors.toList());
+    }
+
+    ////////////////////////////     methods for employees   //////////////////////////////////
+
+    public List<Employee> employeesOlder(LocalDate localDate){
+        return aviary.getEmployees().stream().filter(x -> x.getDateOfBirth().isAfter(localDate)).collect(Collectors.toList());
+    }
+
+    public List<Employee> employeesYounger(LocalDate localDate){
+        return aviary.getEmployees().stream().filter(x -> x.getDateOfBirth().isBefore(localDate)).collect(Collectors.toList());
+    }
+
+    public List<Employee> employeesWithSex(Sex sex){
+        return aviary.getEmployees().stream().filter(x -> x.getSex().equals(sex)).collect(Collectors.toList());
+    }
+
+    /**
+     *
+     * @param start date
+     * @param end date
+     * @return list fo employees which DateOfBirth a within from start to end
+     */
+    public List<Employee> employeesWithBirthDate(LocalDate start,LocalDate end){
+        return aviary.getEmployees().stream().filter(x -> x.getDateOfBirth().isAfter(start))
+                .filter(x -> x.getDateOfBirth().isBefore(end)).collect(Collectors.toList());
     }
 
     ////////////////////////////////        Sort animals      /////////////////////////////////////////
