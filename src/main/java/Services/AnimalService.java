@@ -2,6 +2,8 @@ package Services;
 
 import Classes.Animal;
 import Classes.Vaccine;
+import Enums.Disease;
+import Enums.VaccineType;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,6 +29,17 @@ public class AnimalService {
         Collections.sort(animal.getVaccines());
         return animal.getVaccines();
     }
+
+
+    public List<Vaccine> vaccinesFromDisease(Disease disease){
+        return animal.getVaccines().stream().filter(x -> x.getDisease().equals(disease)).collect(Collectors.toList());
+    }
+
+    public List<Vaccine> vaccinesWithType(VaccineType vaccineType){
+        return animal.getVaccines().stream().filter(x -> x.getVaccineType().equals(vaccineType)).collect(Collectors.toList());
+    }
+
+    ///////////////////////////     sorting    /////////////////////////
 
     public List<Vaccine> sortVaccinesWithStream(){
         return animal.getVaccines().stream().sorted().collect(Collectors.toList());
